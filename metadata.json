@@ -1,0 +1,5 @@
+{
+  "name": "Colloki",
+  "description": "A multi-tenant SaaS application for enterprise collaboration and management, featuring robust security, customization, and file management capabilities.",
+  "requestFramePermissions": []
+}
