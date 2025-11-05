@@ -13,8 +13,8 @@ const defaultSettings: Omit<TenantSettings, 'tenantId'> = {
   appName: 'Colloki',
   logoUrl: null,
   faviconUrl: null,
-  primaryColor: '#3b82f6', // blue-500
-  secondaryColor: '#64748b', // slate-500
+  primaryColor: '#4f46e5', // indigo-600
+  secondaryColor: '#6b7280', // gray-500
   customDomain: '',
   supportEmail: '',
   hidePoweredBy: false,

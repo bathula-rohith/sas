@@ -38,9 +38,9 @@ const Sidebar: React.FC = () => {
   }
   
   const NavItem: React.FC<NavItemProps> = ({ item }) => {
-    const commonClasses = "flex items-center space-x-3 w-full px-3 py-2 rounded-md transition-colors duration-200 text-sm font-medium";
-    const activeClass = "bg-gray-100 dark:bg-gray-700 text-text-primary";
-    const inactiveClass = "text-text-secondary hover:bg-gray-100 dark:hover:bg-gray-700";
+    const commonClasses = "flex items-center space-x-3 w-full px-4 py-2.5 rounded-md transition-colors duration-200 text-sm font-medium relative";
+    const activeClass = "bg-primary/10 text-primary font-semibold";
+    const inactiveClass = "text-text-secondary hover:bg-primary/5 hover:text-text-primary";
     
     if (item.children) {
       if (!hasPermission(item.permission)) return null;
@@ -52,8 +52,9 @@ const Sidebar: React.FC = () => {
         <div>
           <button
             onClick={() => toggleMenu(item.titleKey)}
-            className={`${commonClasses} justify-between ${isActive ? 'text-text-primary' : 'text-text-secondary'}`}
+            className={`${commonClasses} justify-between ${isActive ? 'text-primary' : 'text-text-secondary'}`}
           >
+            {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-1 bg-primary rounded-r-full"></div>}
             <div className="flex items-center space-x-3">
               <span className={isActive ? 'text-primary' : ''}>{item.icon}</span>
               {item.titleKey === 'sidebar.commonSettings' ? (
@@ -67,7 +68,7 @@ const Sidebar: React.FC = () => {
             </span>
           </button>
           {openMenus[item.titleKey] && (
-            <div className="pl-6 mt-1 space-y-1">
+            <div className="pl-8 mt-1 space-y-1">
               {item.children.map((child) => (
                 <NavItem item={child} key={child.titleKey} />
               ))}
@@ -84,23 +85,28 @@ const Sidebar: React.FC = () => {
         to={item.path!}
         className={({ isActive }) => `${commonClasses} ${isActive ? activeClass : inactiveClass}`}
       >
-        {item.icon}
-        <span>{t(item.titleKey)}</span>
+        {({ isActive }) => (
+            <>
+                {isActive && <div className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-1 bg-primary rounded-r-full"></div>}
+                {item.icon}
+                <span>{t(item.titleKey)}</span>
+            </>
+        )}
       </NavLink>
     );
   };
   
   return (
     <aside className="w-56 flex-shrink-0 bg-surface border-r border-border-default flex flex-col">
-      <div className="h-14 flex items-center px-4 border-b border-border-default">
-        <div className="flex items-center space-x-2">
-            {logoUrl ? <img src={logoUrl} alt="Logo" className="h-7 w-auto" />
-            : <div className="w-6 h-6 bg-primary rounded-lg"></div>
+      <div className="h-16 flex items-center px-4 border-b border-border-default">
+        <div className="flex items-center space-x-3">
+            {logoUrl ? <img src={logoUrl} alt="Logo" className="h-8 w-auto" />
+            : <div className="w-7 h-7 bg-primary rounded-lg"></div>
             }
-            <h1 className="text-lg font-bold text-text-primary">{appName}</h1>
+            <h1 className="text-xl font-bold text-text-primary">{appName}</h1>
         </div>
       </div>
-      <nav className="flex-1 p-3 space-y-2">
+      <nav className="flex-1 p-3 space-y-1.5">
         {NAVIGATION_ITEMS.map(item => (
           <NavItem item={item} key={item.titleKey} />
         ))}

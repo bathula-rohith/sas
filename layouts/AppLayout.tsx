@@ -10,7 +10,7 @@ const AppLayout: React.FC = () => {
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
-        <main className="flex-1 overflow-x-hidden overflow-y-auto p-6">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 sm:p-8">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>
